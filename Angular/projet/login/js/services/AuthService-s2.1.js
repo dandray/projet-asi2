@@ -8,9 +8,9 @@ function authFnc() {
 		checkUser: checkUser,
 		userList: userList
 	};
-	function checkUser(userlogin,userpwd){
-// TODO
-	};
+    function checkUser(userlogin,userpwd){
+        return (userMap[userlogin]==userpwd);
+    };
 	function userList(){
 			var userlist=[];
 			var i=0;
