@@ -15,13 +15,11 @@ server.listen(CONFIG.port);
 // appel dans les autres modulesvar  CONFIG  =  JSON.parse(process.env.CONFIG);
 
 
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({extended: true})); 
 app.use(defaultRoute);
 app.use("/admin", express.static (path.join(__dirname, "public/admin")));
 app.use("/watch", express.static (path.join(__dirname, "public/watch")));
-	// app.get("/", function(request, response)
-	// {
-	// 	response.send("Coucou !");
-	// });
 
 	app.get( "/loadPres", function (request, response) {
 		fs.readdir(CONFIG.presentationDirectory, function (err, files) {
@@ -45,13 +43,13 @@ app.use("/watch", express.static (path.join(__dirname, "public/watch")));
 		});
 	});
 
-	app.use(bodyParser.json());       // to support JSON-encoded bodies
-	app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-	extended: true})); 
+app.post("/savePres", function(request,response) {
+	console.dir(request.body);
+    var pres = request.body;
+    var id = pres.id;
+    fs.writeFile(path.join(CONFIG.presentationDirectory, id+".pres.json"), JSON.stringify(pres), "utf8", response.end());
+});
 
-app.post( "/savePres", function (request, response) {
-	var body = request.body;
-	var content = JSON.parse(body.toString());
-		var id = pres.id;
-		fs.writeFile(CONFIG.presentationDirectory + "/" + id + ".pres.json", JSON.stringify(pres), "utf8", response.end());
-	});
+server.listen(CONFIG.port, function() {
+	console.log("Server OK: " + CONFIG.port);
+});
