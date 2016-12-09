@@ -1,0 +1,5 @@
+{
+    "port" :  1337,
+    "contentDirectory" : "/home/ubuntu/Desktop/yolo/ProjetNodeJs/tp/uploads",
+    "presentationDirectory" : "/home/ubuntu/Desktop/yolo/ProjetNodeJs/tp/presentation_content"
+}

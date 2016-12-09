@@ -9,4 +9,4 @@ JEE/**/.settings
 JEE/**/.classpath
 JEE/target
 
-ProjetNodeJs/tp/node_modules
+ProjetNodeJs/tp/node_modules/*
