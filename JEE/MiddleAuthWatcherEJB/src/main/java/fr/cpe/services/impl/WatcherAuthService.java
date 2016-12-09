@@ -10,7 +10,9 @@ public class WatcherAuthService implements IWatcherAuthService{
 
 	@Override
 	public UserModel watcherAuthServiceQuery(UserModel user) {
-		return (user);
+		user.setFirstName("Mouchou");
+		user.setLastName("Sabbioni");
+		return user;
 	}
 	
 }
