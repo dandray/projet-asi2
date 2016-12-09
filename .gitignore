@@ -1,0 +1,12 @@
+JEE/**/target
+JEE/.classpath
+JEE/.project
+JEE/.settings
+JEE/.classpath
+JEE/**/.classpath
+JEE/**/.project
+JEE/**/.settings
+JEE/**/.classpath
+JEE/target
+
+ProjetNodeJs/tp/node_modules
