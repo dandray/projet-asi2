@@ -21,14 +21,16 @@ import fr.cpe.services.MessageReceiverSyncLocal;
 public class MessageReceiverSync implements MessageReceiverSyncLocal {
 	
 	Logger logger = Logger.getLogger(MessageReceiverSyncLocal.class.getName());
+	
 	@Inject
 	JMSContext context;
+	
 	@Resource(mappedName = "java:/jms/queue/watcherqueue")
 	Queue queue;
 	
 public UserModel receiveMessage() {
 	try {
-	Message message = context.createConsumer(queue).receive(1000);
+	Message message = context.createConsumer(queue).receive(10000);
 		if (message instanceof TextMessage){
 			
 				logger.info(((TextMessage) message).getText().toString());
