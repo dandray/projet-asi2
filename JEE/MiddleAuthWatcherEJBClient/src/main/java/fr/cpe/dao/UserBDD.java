@@ -1,4 +1,4 @@
-package fr.cpe.services;
+package fr.cpe.dao;
 
 import java.util.logging.Logger;
 
@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import fr.cpe.model.UserModel;
+import fr.cpe.services.MessageReceiverSyncLocal;
 
 @Stateless
 public class UserBDD implements IUserBDD{
@@ -19,16 +20,17 @@ public class UserBDD implements IUserBDD{
 	
 	public UserModel checkUserBDD (UserModel user){
 		
+		UserModel userResponse = null;
 		try{
-			UserModel userResponse = (UserModel)entityManager.createQuery("from UserModel u where u.login = :login AND u.password = :password")
+			userResponse = (UserModel)entityManager.createQuery("from UserModel u where u.login = :login AND u.password = :password")
 					.setParameter("login", user.getLogin())
 					.setParameter("password", user.getPassword())
 					.getSingleResult();
-					return userResponse;
 					
 		} catch (NoResultException nre) {
-			logger.info("NoResultException UserBDD");
+			logger.info("NoResultException UserBDD : pas de user");
+
 		}
-		return null;
+		return userResponse;
 	}
 }

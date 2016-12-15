@@ -1,5 +1,5 @@
 {
     "port" :  1337,
-    "contentDirectory" : "/home/ubuntu/Desktop/yolo/ProjetNodeJs/tp/uploads",
-    "presentationDirectory" : "/home/ubuntu/Desktop/yolo/ProjetNodeJs/tp/presentation_content"
+    "contentDirectory" : "/Applications/MAMP/htdocs/projet-asi2/ProjetNodeJs/tp/uploads",
+    "presentationDirectory" : "/Applications/MAMP/htdocs/projet-asi2/ProjetNodeJs/tp/presentation_content"
 }
