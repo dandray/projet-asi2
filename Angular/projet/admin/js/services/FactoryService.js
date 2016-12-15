@@ -21,13 +21,28 @@ function factoryFnc(){
         return uuid;
     };
     function contentCreation(title,type,src){
-    // TODO
+        var content = new Object();
+        content.id = generateUUID();
+        content.title = title;
+        content.type = type;
+        content.src = src;
+        return content;
     };
     function slidCreation(title,txt){
-    // TODO
+        var slid = new Object();
+        slid.id = generateUUID();
+        slid.title = title;
+        slid.txt = txt;
+        slid.contentMap = [];
+        return slid;
     };
     function presentationCreation(title,description){
-    // TODO
+        var presentation = new Object();
+        presentation.id = generateUUID();
+        presentation.title = title;
+        presentation.description = description;
+        presentation.slidArray = [];
+        return presentation;
     };
     function mapToArray(map){
         contentArray=[];
