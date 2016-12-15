@@ -1,4 +1,4 @@
-package fr.cpe.services;
+package fr.cpe.dao;
 
 import javax.ejb.Local;
 

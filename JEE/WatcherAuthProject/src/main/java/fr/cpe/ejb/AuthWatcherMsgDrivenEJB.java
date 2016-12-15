@@ -11,9 +11,9 @@ import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
 import javax.jms.TextMessage;
 
+import fr.cpe.dao.UserBDD;
 import fr.cpe.model.UserModel;
 import fr.cpe.services.MessageSenderQueueLocal;
-import fr.cpe.services.UserBDD;
 
 
 

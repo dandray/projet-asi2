@@ -1,4 +1,4 @@
-package fr.cpe.services;
+package fr.cpe.dao;
 
 import java.util.logging.Logger;
 
@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import fr.cpe.model.UserModel;
+import fr.cpe.services.MessageReceiverSyncLocal;
 
 @Stateless
 public class UserBDD implements IUserBDD{
