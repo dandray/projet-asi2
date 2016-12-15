@@ -10,8 +10,8 @@ import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.ObjectMessage;
+import javax.jms.Queue;
 import javax.jms.TextMessage;
-import javax.jms.Topic;
 
 import fr.cpe.model.UserModel;
 import fr.cpe.services.MessageReceiverSyncLocal;
@@ -21,14 +21,16 @@ import fr.cpe.services.MessageReceiverSyncLocal;
 public class MessageReceiverSync implements MessageReceiverSyncLocal {
 	
 	Logger logger = Logger.getLogger(MessageReceiverSyncLocal.class.getName());
+	
 	@Inject
 	JMSContext context;
+	
 	@Resource(mappedName = "java:/jms/queue/watcherqueue")
-	Topic topic;
+	Queue queue;
 	
 public UserModel receiveMessage() {
 	try {
-	Message message = context.createConsumer(topic).receive(1000);
+	Message message = context.createConsumer(queue).receive(10000);
 		if (message instanceof TextMessage){
 			
 				logger.info(((TextMessage) message).getText().toString());

@@ -1,7 +1,6 @@
 package fr.cpe.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +15,12 @@ import javax.validation.constraints.NotNull;
 
 public class UserModel implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
@@ -35,18 +39,18 @@ public class UserModel implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "birthdate")
-    private Date birthdate;
-
+    @Column(name = "role")
+    private String role;
+    
     public UserModel() {
     }
 
-    public UserModel(String login, String password, String firstName, String lastName, Date birthdate) {
+    public UserModel(String login, String password, String firstName, String lastName, String role) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthdate = birthdate;
+        this.role = role;
     }
 
     public int getId() {
@@ -89,11 +93,11 @@ public class UserModel implements Serializable {
         this.lastName = lastName;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

@@ -20,5 +20,6 @@ public interface IWatcherAuth{
 	@Produces(MediaType.APPLICATION_JSON)
 	UserModel watcherAuthQuery(UserModel user);
 
+
 }
 
