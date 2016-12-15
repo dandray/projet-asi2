@@ -6,7 +6,9 @@ process.env.CONFIG  =  JSON.stringify(CONFIG);
 var  path  =  require("path");
 var  fs = require('fs');	
 var  defaultRoute  =  require("./app/routes/default.route.js");
+var slidRouter = require("./app/routes/slid.router.js");
 var  bodyParser = require('body-parser');
+var utils = require("./app/utils/utils.js")
 
 // init server
 var  server  =  http.createServer(app);
@@ -18,24 +20,31 @@ server.listen(CONFIG.port);
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); 
 app.use(defaultRoute);
+app.use(slidRouter);
 app.use("/admin", express.static (path.join(__dirname, "public/admin")));
 app.use("/watch", express.static (path.join(__dirname, "public/watch")));
 
-	app.get( "/loadPres", function (request, response) {
-		fs.readdir(CONFIG.presentationDirectory, function (err, files) {
+	app.get("/loadPres", function (request, response) {
+		fs.readdir(CONFIG.presentationDirectory, (err, files) => {
+			if(err){
+				response.end(500, err);
+			}
 			var metaFiles = [];
+
 			for (var i in files) {
 				if (path.extname(files[i]) === ".json") {
 					metaFiles.push(files[i]);
 				}
 			}
+
 			var result = {};
 			var i = 0;
 			metaFiles.forEach(function(file) {
 				fs.readFile(path.join(CONFIG.presentationDirectory, file), function(err, data) {
-					var content = JSON.parse(data.toString());
+					result[path.basename(file,'.pres.json')] = JSON.parse(data.toString());
+					i++;
 					result[content.id] = content;
-					if (i++ === metaFiles.length - 1) {
+					if (i === metaFiles.length) {
 						response.end(JSON.stringify(result));
 					}
 				});
