@@ -6,6 +6,9 @@ import java.util.List;
 import fr.cpe.model.UserModel;
 
 public class DataContainer {
+	
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
 	List<UserModel> users = new ArrayList<UserModel>();
 	
@@ -16,16 +19,15 @@ public class DataContainer {
 		
 	}
 	public String checkUser(UserModel user) {
-		if(users.contains(user)){
-			return "OK";
-		}
+
 		for (UserModel u : users)
 		{
-			if(u.getLogin()==user.getLogin() && u.getPassword()==user.getPassword()){
-				return "OK";
+			// Query query = entityManager.createQuery("SELECT user from users");
+			if(u.getLogin().equals(user.getLogin()) && u.getPassword().equals(user.getPassword())){
+				return "admin";
 			}
 			else{
-				return "KO";
+				return "watcher";
 			}
 		}
 		return null;

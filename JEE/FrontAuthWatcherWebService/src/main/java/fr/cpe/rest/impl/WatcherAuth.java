@@ -13,19 +13,24 @@ public class WatcherAuth implements IWatcherAuth{
 	@Inject
 	IWatcherAuthService watcherAuthService;
 	
+	
+	@Inject
+	MessageSenderLocal sender;
+	
+	@Inject
+	MessageReceiverSyncLocal receiver;
+	
 	@Override
 	public UserModel watcherAuthQuery(UserModel user) {
-		return watcherAuthService.watcherAuthServiceQuery(user);
+		
+		sender.sendMessage(user);
+		UserModel userResponse = receiver.receiveMessage();
+		return userResponse;
 	}
 
 	@Override
 	public String watcherAuth() {
 		return null;
 	}
-	
-	@Inject
-	MessageSenderLocal sender;
-	@Inject
-	MessageReceiverSyncLocal receiver;
-	
+
 }

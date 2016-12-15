@@ -53,7 +53,7 @@ public class AuthWatcherMsgDrivenEJB implements MessageListener {
 					System.out.println("login:"+user.getLogin());
 					System.out.println("pwd:"+user.getPassword());
 					String currentTestRole=dataContainer.checkUser(user);
-				if( currentTestRole.isEmpty() || currentTestRole == ""){
+				if( currentTestRole == null || currentTestRole.isEmpty()){
 					sender.sendMessage(user);
 				}else{
 					user.setRole(currentTestRole);
