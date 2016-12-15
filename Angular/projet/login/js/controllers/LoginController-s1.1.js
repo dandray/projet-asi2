@@ -1,6 +1,6 @@
 angular.module('loginApp').controller('loginCtrl',loginCrtFnt);
 
-loginCrtFnt.$inject=['$scope','$log', 'auth', '$window'];
+loginCrtFnt.$inject=['$scope','$log', 'auth', '$window','$q'];
 
 function loginCrtFnt($scope, $log, auth, $window){
 	$scope.logAuth = function() {
@@ -24,5 +24,18 @@ function loginCrtFnt($scope, $log, auth, $window){
         }else{
             $window.location.href = './loginFail.html';
         }
-    }
+    };
+
+    $scope.localAuthAsk= function(){
+    	/*Bout de code inutile, j'ai d'abord essayé de faire loginSuccess->admin/watch (pas réussi)
+    	var login = $scope.user.login;
+    	var pwd = $scope.user.pwd;
+    	$scope.checkUser;*/
+
+		var promise = auth.authAsk(login, pwd);
+		promise.then(function (role) {
+			$window.location.href = './' + role + '.html';
+		});
+	}
+
 }
