@@ -13,7 +13,7 @@ import javax.jms.TextMessage;
 
 import fr.cpe.model.UserModel;
 import fr.cpe.services.MessageSenderQueueLocal;
-import model.DataContainer;
+import fr.cpe.services.UserBDD;
 
 
 
@@ -28,13 +28,13 @@ import model.DataContainer;
 		})
 
 public class AuthWatcherMsgDrivenEJB implements MessageListener {
-	private DataContainer dataContainer;
 	
 	@Inject MessageSenderQueueLocal sender;
+
+	@Inject
+	private UserBDD userBDD;
 	
-	public AuthWatcherMsgDrivenEJB() {
-		dataContainer=new DataContainer();
-	}
+	public AuthWatcherMsgDrivenEJB() {	}
 	
 	public void onMessage(Message message) {
 		try {
@@ -52,11 +52,11 @@ public class AuthWatcherMsgDrivenEJB implements MessageListener {
 					System.out.println("User Details: ");
 					System.out.println("login:"+user.getLogin());
 					System.out.println("pwd:"+user.getPassword());
-					String currentTestRole=dataContainer.checkUser(user);
-				if( currentTestRole == null || currentTestRole.isEmpty()){
+					UserModel currentTestRole=userBDD.checkUserBDD(user);
+				if( currentTestRole.getRole() == null || currentTestRole.getRole().isEmpty()){
 					sender.sendMessage(user);
 				}else{
-					user.setRole(currentTestRole);
+					user.setRole(currentTestRole.getRole());
 					sender.sendMessage(user);
 					}
 				}
