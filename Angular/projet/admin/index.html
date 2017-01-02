@@ -43,9 +43,12 @@
                     <label for="currentSlidTitle">Titre</label>
                     <input type="text" ng-model="currentSlide.title" class="form-control" id="currentSlidTitle">
                     <label for="currentSlidDesc">Description</label>
-                    <input type="text" ng-model="currentSlide.description" class="form-control" id="currentSlidDesc">
+                    <input type="textarea" ng-model="currentSlide.description" class="form-control" id="currentSlidDesc">
                 </div>
-                <img src=" {{currentSlide.contentMap[0].src}} " class="img-responsive">
+                <img ng-if="!isSlidContentEmpty(currentSlide)" src=" {{currentSlide.contentMap[0].src}} " class="img-responsive" >
+                <div ng-if="isSlidContentEmpty(currentSlide)">
+                    IMAGE NOT SET
+                </div>
             </div>
         </div>
     </div>

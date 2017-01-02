@@ -20,7 +20,7 @@ function eventCrtFnt($scope, factory){
     };
 
     $scope.isSlidContentEmpty=function(slid){
-        if(slid.contentMap[1]== undefined){
+        if(slid.contentMap[0]== undefined){
             return true;
         }
         return false
