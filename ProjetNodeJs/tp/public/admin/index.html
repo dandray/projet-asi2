@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Admin</title>
+	</head>
+	<body>
+		<button type="button" onclick="SendSlidEvent('START','efa0a79a-2f20-4e97-b0b7-71f824bfe349')">START</button>
+		<script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect();
+			socket.on('connection', function(data) {
+				socket.emit('data_comm', socket.io.engine.id);
+			});
+
+			function SendSlidEvent(command,pres_id) {
+				if (command === 'START') {
+					socket.emit('slidEvent',{COMMAND: command, PRES_ID: pres_id});
+				}
+				else {
+					socket.emit('slidEvent',{COMMAND: command});
+				}
+			}
+		</script>
+	</body>
+</html>

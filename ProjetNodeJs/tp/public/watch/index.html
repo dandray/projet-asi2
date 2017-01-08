@@ -1,0 +1,19 @@
+<html>
+	<head></head>
+	<body>
+		<div id="contenu_pres"></div>
+		<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+		<script>
+		  var socket = io.connect();
+			socket.on('connection', function(data) {
+				socket.emit('data_comm', socket.io.engine.id);
+			});
+
+
+			socket.on('currentSlidEvent', function(data) {
+				var contenu = document.getElementById('contenu_pres');
+				contenu.innerHTML = JSON.stringify(data);
+			});
+		</script>
+	</body>
+</html>

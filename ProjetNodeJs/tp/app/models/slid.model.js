@@ -4,23 +4,33 @@ var fs = require("fs");
 var path = require("path");
 
 function SlidModel(slidModel){
-	this.type;
-	this.id;
-	this.title;
-	this.fileName; //stocké dans CONFIG.contentDirectory
+	if(typeof slidModel === "undefined"){
+		this.type="";
+		this.id = "";
+		this.title = "";
+		this.fileName = "";
+	}
+
+	else{
+			this.type = slidModel.type;
+			this.id = slidModel.id;
+			this.title = slidModel.title;
+			this.fileName = slidModel.fileName; //stocké dans CONFIG.contentDirectory
+	}
 	var data;
 	this.getData= function(){
-		return data;
+		return this.data;
 	}
 	this.setData = function(data){
 		this.data = data;
 	}
+
 }
 
 
 //Création
 SlidModel.create = function(slid, callback){
-	fs.writeFile(path.join(CONFIG.presentationDirectory, slid.fileName), slid.getData(), 'binary', function(err, response){
+	fs.writeFile(path.join(CONFIG.presentationDirectory, slid.fileName), slid.getData(),'binary', function(err, response){
 		if(err) {
 			callback(err); 
 		}
@@ -69,8 +79,8 @@ SlidModel.update = function(slid, callback){
 	};
 	fs.writeFile(path.join(CONFIG.contentDirectory, slid.id+".meta.json"), JSON.stringify(metadata), "utf8", function(err,response) { if(err) { callback(err); }});
 
-	if (slid.data !== null && slid.data.length>0) {
-		fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.data, 'binary', function(err,response) { if(err) { callback(err); }});
+	if (slid.getData() !== null && slid.getData().length>0) {
+		fs.writeFile(path.join(CONFIG.contentDirectory, slid.fileName), slid.getData(), 'binary', function(err,response) { if(err) { callback(err); }});
 	}
 }
 

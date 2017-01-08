@@ -53,7 +53,7 @@ this.create = function(request, response){
 		if (err) {
 			response.end(err);
 		}
-		response.end('ça marche');
+		response.end('Création de la slide réussie');
 	});
 }
 
@@ -70,7 +70,7 @@ this.read = function(request, response){
 		}
 
 		if(json){
-			response.end(JSON.stringify.data);
+			response.end(JSON.stringify(data));
 		}
 
 		else{
