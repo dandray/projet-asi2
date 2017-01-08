@@ -27,12 +27,12 @@ function loginCrtFnt($scope, $log, auth, $window){
     };
 
     $scope.localAuthAsk= function(){
-    	/*Bout de code inutile, j'ai d'abord essayé de faire loginSuccess->admin/watch (pas réussi)
+    	//Bout de code inutile, j'ai d'abord essayé de faire loginSuccess->admin/watch (pas réussi)
     	var login = $scope.user.login;
     	var pwd = $scope.user.pwd;
-    	$scope.checkUser;*/
+    	//$scope.checkUser;*/
 
-		var promise = auth.authAsk(login, pwd);
+		var promise = auth.localAuthAsk(login, pwd);
 		promise.then(function (role) {
 			$window.location.href = './' + role + '.html';
 		});
